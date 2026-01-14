@@ -61,14 +61,20 @@ public class Byte {
 
     // bytecode manipulation (com ByteBuddy)
     // Modifica o bytecode ANTES da classe ser carregada
-    new ByteBuddy()
+    Class<?> byteModel = new ByteBuddy()
         .subclass(Object.class)
-        // .name("com.ddaaniel.DynamicClass")
         .method(ElementMatchers.named("toString"))
         .intercept(FixedValue.value("Intercepted by ByteBuddy!"))
         .make()
         .load(Byte.class.getClassLoader())
         .getLoaded();
+
+		Object instanceModel = null;
+		try {
+			instanceModel = byteModel.getConstructor().newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
     /*
      *
@@ -84,7 +90,7 @@ public class Byte {
      *
      */
     log.info(new Oh().getClass().toString());
-
+		log.info(instanceModel.toString());
     new Byte().doReflection();
   }
 }
