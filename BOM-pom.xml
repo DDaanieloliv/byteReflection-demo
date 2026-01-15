@@ -56,6 +56,7 @@
     <properties>
         <!-- Java -->
         <java.version>17</java.version>
+				<bytebuddy.version>1.14.19</bytebuddy>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         
         <!-- Encoding -->

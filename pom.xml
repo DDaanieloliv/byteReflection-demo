@@ -8,28 +8,72 @@
     <groupId>com.ddaaniel</groupId>
     <artifactId>bytebuddy-test</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
     <name>ByteBuddy Test</name>
 
-    <properties>
-        <!-- <maven.compiler.source>21</maven.compiler.source> -->
-        <!-- <maven.compiler.target>21</maven.compiler.target> -->
-        <!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
+    <description>Descrição do Sistema</description>
+    <url>https://empresa.com/[...]</url>
 
-				<!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
-				<!-- <maven.compiler.release>21</maven.compiler.release> -->
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Empresa XYZ</name>
+        <url>https://empresa.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>dev</id>
+            <name>[...]</name>
+            <email>[...]@empresa.com</email>
+            <organization>Empresa XYZ</organization>
+            <roles>
+                <role>Tech Lead</role>
+            </roles>
+        </developer>
+    </developers>
+    
+    <scm>
+			<connection>scm:git:https://github.com/empresa/sistema-[...].git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/empresa/sistema-[...].git</developerConnection>
+        <url>https://github.com/empresa/sistema-delivery</url>
+        <tag>v${project.version}</tag>
+    </scm>
+
+    <properties>
+        <java.version>21</java.version>
+				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+				<maven.compiler.release>21</maven.compiler.release>
+				<bytebuddy.version>1.14.19</bytebuddy.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
-            <version>1.14.19</version>
+						<version>${bytebuddy.version}</version>
         </dependency>
 
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy-agent</artifactId>
-            <version>1.14.19</version>
+            <version>${bytebuddy.version}</version>
         </dependency>
     </dependencies>
 
@@ -38,14 +82,41 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <!-- <source>21</source> -->
-                    <!-- <target>21</target> -->
-										<release>21</release>
-                    <encoding>UTF-8</encoding>
+                    <release>${java.version}</release>
+                    <parameters>true</parameters> <!-- Para nomes de parâmetros no reflection -->
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>empresa-nexus</id>
+            <url>https://nexus.empresa.com/repository/maven-public/</url>
+        </repository>
+    </repositories>
+    
+    <distributionManagement>
+        <repository>
+            <id>empresa-releases</id>
+            <url>https://nexus.empresa.com/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>empresa-snapshots</id>
+            <url>https://nexus.empresa.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
