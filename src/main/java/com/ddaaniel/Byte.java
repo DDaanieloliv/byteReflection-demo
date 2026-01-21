@@ -1,6 +1,7 @@
 package com.ddaaniel;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -90,5 +91,8 @@ public class Byte {
 		 *
 		 */
 		log.info(new Oh().getClass().toString());
+
+		ArrayList<Integer> list = new ArrayList<>();
+		list.stream().filter(element -> (element > 10));
 	}
 }
