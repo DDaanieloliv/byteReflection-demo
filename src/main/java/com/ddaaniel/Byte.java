@@ -9,16 +9,31 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.implementation.FixedValue;
 import net.bytebuddy.matcher.ElementMatchers;
 
+sealed interface Result<T, E> {
+	record Success<T, E>(T value) implements Result<T, E> {
+	}
+	record Failure<T, E>(E error) implements Result<T, E> {
+	}
+}
+
+
+
 class Oh {
 	private static final Logger log = Logger.getLogger(Byte.class.getName());
+
+	public Result<String, String> tryUnionType(int code){
+		if (code > 100000) return new Result.Success<>("OPERATIONS A SUCCESS!");
+		return new Result.Failure<>("OPERATIONS WAS A CATASTROPHE!");
+	}
 
 	public void donothing() {
 		log.info("nothing");
 	}
 }
 
-public class Byte {
 
+
+public class Byte {
 	private static final Logger log = Logger.getLogger(Byte.class.getName());
 
 	/*
