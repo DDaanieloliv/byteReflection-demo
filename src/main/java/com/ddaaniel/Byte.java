@@ -108,6 +108,6 @@ public class Byte {
 		log.info(new Oh().getClass().toString());
 
 		ArrayList<Integer> list = new ArrayList<>();
-		list.stream().filter(element -> (element > 10));
+		list.stream().filter( (element) -> (element > 10) );
 	}
 }
