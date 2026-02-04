@@ -111,8 +111,7 @@ class Game {
 	public String quest() {
 		var A = new Game[5];
 
-		int count = 0;
-		for (;;) {
+		for (int count = 0;;) {
 			if (count == A.length) break;
 			A[count] = new Game();
 			count++;
@@ -125,9 +124,18 @@ class Game {
 	}
 }
 
+
+class Times {
+
+	public boolean isMultiple(long n, long m) {
+		if (m == 0) return false;
+		return n % m == 0;
+	}
+}
+
 public class Byte {
 
 	public static void main(String[] args) {
-		System.out.println(new Game().quest());
+		System.out.println(String.valueOf(new Times().isMultiple(15, 3)));
 	}
 }
