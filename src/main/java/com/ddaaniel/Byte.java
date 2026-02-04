@@ -12,29 +12,23 @@ import net.bytebuddy.matcher.ElementMatchers;
 sealed interface Result<T, E> {
 	record Success<T, E>(T value) implements Result<T, E> {
 	}
+
 	record Failure<T, E>(E error) implements Result<T, E> {
 	}
 }
 
-
-
 class Oh {
-	private static final Logger log = Logger.getLogger(Byte.class.getName());
-
-	public Result<String, String> tryUnionType(int code){
-		if (code > 100000) return new Result.Success<>("OPERATIONS A SUCCESS!");
-		return new Result.Failure<>("OPERATIONS WAS A CATASTROPHE!");
-	}
+	private static final Logger log = Logger.getLogger(Oh.class.getName());
 
 	public void donothing() {
 		log.info("nothing");
 	}
-}
 
-
-
-public class Byte {
-	private static final Logger log = Logger.getLogger(Byte.class.getName());
+	public Result<String, String> tryUnionType(int code) {
+		if (code == 500)
+			return new Result.Success<>("OPERATIONS A SUCCESS!");
+		return new Result.Failure<>("OPERATIONS WAS A CATASTROPHE!");
+	}
 
 	/*
 	 *
@@ -50,7 +44,7 @@ public class Byte {
 	 * da JVM e para recursos como reflexão.
 	 *
 	 */
-	public void doReflection() {
+	public void aboutReflection() {
 		try {
 			Object typeReference = Class.forName("com.ddaaniel.Oh").getDeclaredConstructor().newInstance();
 			for (Method m : typeReference.getClass().getMethods()) {
@@ -70,8 +64,7 @@ public class Byte {
 		}
 	}
 
-	public static void main(String[] args) {
-
+	public void dealWithByteBuddy() {
 		// bytecode manipulation (com ByteBuddy)
 		// Modifica o bytecode ANTES da classe ser carregada
 		Class<?> byteModel = new ByteBuddy()
@@ -86,7 +79,7 @@ public class Byte {
 
 			Object instanceModel = byteModel.getConstructor().newInstance();
 			log.info(instanceModel.toString());
-			new Byte().doReflection();
+			new Oh().aboutReflection();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,6 +101,33 @@ public class Byte {
 		log.info(new Oh().getClass().toString());
 
 		ArrayList<Integer> list = new ArrayList<>();
-		list.stream().filter( (element) -> (element > 10) );
+		list.stream().filter((element) -> (element > 10));
+	}
+}
+
+class Game {
+	private int score;
+
+	public String quest() {
+		var A = new Game[5];
+
+		int count = 0;
+		for (;;) {
+			if (count == A.length) break;
+			A[count] = new Game();
+			count++;
+		}
+
+		var B = A.clone();
+		A[4].score = 550;
+
+		return String.valueOf(A[4] == B[4]);
+	}
+}
+
+public class Byte {
+
+	public static void main(String[] args) {
+		System.out.println(new Game().quest());
 	}
 }
