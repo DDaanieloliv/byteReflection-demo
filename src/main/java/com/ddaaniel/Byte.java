@@ -128,8 +128,7 @@ class Game {
 class Times {
 
 	public boolean isMultiple(long n, long m) {
-		if (m == 0) return false;
-		return n % m == 0;
+		return  m != 0 && n % m == 0; 
 	}
 }
 
