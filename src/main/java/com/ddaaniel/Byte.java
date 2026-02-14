@@ -3,7 +3,9 @@ package com.ddaaniel;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.implementation.FixedValue;
@@ -100,8 +102,16 @@ class Oh {
 		 */
 		log.info(new Oh().getClass().toString());
 
-		ArrayList<Integer> list = new ArrayList<>();
-		list.stream().filter((element) -> (element > 10));
+		List<String> someList = List.of("Ana", "Pedro", "Maria");
+		Stream<String> list = someList.stream()
+				.filter(n -> n.startsWith("A"))
+				.map(n -> n.toUpperCase());
+
+		list.forEach(n -> System.out.println(n));
+
+
+		ArrayList<Integer> listt = new ArrayList<>();
+		listt.stream().filter((element) -> (element > 10));
 	}
 }
 
@@ -112,7 +122,8 @@ class Game {
 		var A = new Game[5];
 
 		for (int count = 0;;) {
-			if (count == A.length) break;
+			if (count == A.length)
+				break;
 			A[count] = new Game();
 			count++;
 		}
@@ -124,11 +135,10 @@ class Game {
 	}
 }
 
-
 class Times {
 
 	public boolean isMultiple(long n, long m) {
-		return  m != 0 && n % m == 0; 
+		return m != 0 && n % m == 0;
 	}
 }
 
