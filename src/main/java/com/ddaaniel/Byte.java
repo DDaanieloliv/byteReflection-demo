@@ -142,6 +142,20 @@ class Times {
 	}
 }
 
+class Even {
+	public boolean isEven(int i) {
+		if (i < 0) i = -i;
+
+		for(;;) {
+			if (i < 1) break;
+			i = i - 2;
+		}
+
+//> return (i & 1) == 0;
+		return i == 0; 
+	}
+}
+
 public class Byte {
 
 	public static void main(String[] args) {
