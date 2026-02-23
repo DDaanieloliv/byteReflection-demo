@@ -22,14 +22,21 @@ sealed interface Result<T, E> {
 class Oh {
 	private static final Logger log = Logger.getLogger(Oh.class.getName());
 
-	public void donothing() {
-		log.info("nothing");
+	public Result<String, Integer> tryUnionType(boolean reason) {
+		if (reason)
+			return new Result.Success<>("OPERATIONS A SUCCESS!");
+		return new Result.Failure<>(500);
 	}
 
-	public Result<String, String> tryUnionType(int code) {
-		if (code == 500)
-			return new Result.Success<>("OPERATIONS A SUCCESS!");
-		return new Result.Failure<>("OPERATIONS WAS A CATASTROPHE!");
+	public void ok() {
+		// var resultado = tryUnionType(true);
+		// var x = switch (resultado) {
+
+		switch (tryUnionType(true)) {
+			case Result.Success(var s) -> System.out.println(s);
+			case Result.Failure(var f) -> log.info("Error: " + f);
+		};
+
 	}
 
 	/*
@@ -109,7 +116,6 @@ class Oh {
 
 		list.forEach(n -> System.out.println(n));
 
-
 		ArrayList<Integer> listt = new ArrayList<>();
 		listt.stream().filter((element) -> (element > 10));
 	}
@@ -144,48 +150,55 @@ class Times {
 
 class Even {
 	public boolean isEven(int i) {
-		if (i < 0) i = -i;
+		if (i < 0)
+			i = -i;
 
-		for(;;) {
-			if (i < 1) break;
+		for (;;) {
+			if (i < 1)
+				break;
 			i = i - 2;
 		}
 
 		// return (i & 1) == 0;
-		return i == 0; 
+		return i == 0;
 	}
 }
-
 
 class sumOfAllOdd {
 	public int sum(int i) {
 		int x = 0;
-		if (i < 0) i = -i;
-		for (;;){
-			if (i == 0) break;
-			if ((i & 1) == 1) x = x + i;
-			i =  i - 1;
+		if (i < 0)
+			i = -i;
+		for (;;) {
+			if (i == 0)
+				break;
+			if ((i & 1) == 1)
+				x = x + i;
+			i = i - 1;
 		}
 
 		return x;
 	}
 }
 
-
 class sumOfAllSquares {
 	private boolean isPrimeNumber(int i) {
-		for(;;) {
-			if (i == 1) break;
-			if (i % (i - 1) == 0) return false;
+		for (;;) {
+			if (i == 1)
+				break;
+			if (i % (i - 1) == 0)
+				return false;
 			i = i - 1;
 		}
 		return true;
 	}
 
 	private boolean isSquare(int i) {
-		for(;;) {
-			if (i == 1) break;
-			if (isPrimeNumber(i - 1) && (i - 1) * (i - 1) == i) return true;
+		for (;;) {
+			if (i == 1)
+				break;
+			if (isPrimeNumber(i - 1) && (i - 1) * (i - 1) == i)
+				return true;
 			i = i - 1;
 		}
 		return false;
@@ -193,18 +206,19 @@ class sumOfAllSquares {
 
 	public int sum(int i) {
 		int x = 0;
-		if (i < 0) i = -i;
-		for(;;){
-			if (i == 0) break;
-			if (isSquare(i)) x = x + i;
+		if (i < 0)
+			i = -i;
+		for (;;) {
+			if (i == 0)
+				break;
+			if (isSquare(i))
+				x = x + i;
 			i = i - 1;
 		}
-	
+
 		return x;
 	}
 }
-
-
 
 public class Byte {
 
