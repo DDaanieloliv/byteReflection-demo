@@ -164,16 +164,21 @@ class Even {
 	}
 }
 
-class sumOfAllOdd {
+class SumOfAllTheOddPositiveIntegersLessThanOrEqualToN {
+
+	public int recursive_sum(int i) {
+		if (i < 0) i = -i;
+		if (i == 0) return 0;
+
+		return (i & 1) == 1 ? i + recursive_sum(i -1) : recursive_sum(i -1);
+	}
+
 	public int sum(int i) {
 		int x = 0;
-		if (i < 0)
-			i = -i;
+		if (i < 0) i = -i;
 		for (;;) {
-			if (i == 0)
-				break;
-			if ((i & 1) == 1)
-				x = x + i;
+			if (i == 0) break;
+			if ((i & 1) == 1) x = x + i;
 			i = i - 1;
 		}
 
@@ -181,39 +186,22 @@ class sumOfAllOdd {
 	}
 }
 
-class sumOfAllSquares {
-	private boolean isPrimeNumber(int i) {
-		for (;;) {
-			if (i == 1)
-				break;
-			if (i % (i - 1) == 0)
-				return false;
-			i = i - 1;
-		}
-		return true;
-	}
+class SumOfTheSquaresOfAllPositiveIntegersLessThanOrEqualToN {
 
-	private boolean isSquare(int i) {
-		for (;;) {
-			if (i == 1)
-				break;
-			if (isPrimeNumber(i - 1) && (i - 1) * (i - 1) == i)
-				return true;
-			i = i - 1;
-		}
-		return false;
+	public int recursive_sum(int i){
+		if (i > 0) i = -i;
+		if (i == 0) return 0;
+
+		return  (i * i) + recursive_sum(i - 1);
 	}
 
 	public int sum(int i) {
 		int x = 0;
-		if (i < 0)
-			i = -i;
-		for (;;) {
-			if (i == 0)
-				break;
-			if (isSquare(i))
-				x = x + i;
-			i = i - 1;
+		if (i < 0) i = -i;
+		for (int count = 0;;) {
+			if (i == 0 || !(count <= i)) break;
+			x = x + (count * count);
+			count++;
 		}
 
 		return x;
