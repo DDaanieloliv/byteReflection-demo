@@ -141,24 +141,21 @@ class Game {
 	}
 }
 
-class Times {
+class IsNMultipleOfM {
 
 	public boolean isMultiple(long n, long m) {
 		return m != 0 && n % m == 0;
 	}
 }
 
-class Even {
+class EvenCannotUseTheMultiplicationModulusOrDivisionOperators {
 	public boolean isEven(int i) {
-		if (i < 0)
-			i = -i;
+		if (i < 0) i = -i;
 
 		for (;;) {
-			if (i < 1)
-				break;
+			if (i < 1) break;
 			i = i - 2;
 		}
-
 		// return (i & 1) == 0;
 		return i == 0;
 	}
@@ -170,7 +167,7 @@ class SumOfAllTheOddPositiveIntegersLessThanOrEqualToN {
 		if (i < 0) i = -i;
 		if (i == 0) return 0;
 
-		return (i & 1) == 1 ? i + recursive_sum(i -1) : recursive_sum(i -1);
+		return (i & 1) == 1 ? i + recursive_sum(i - 1) : recursive_sum(i - 1);
 	}
 
 	public int sum(int i) {
@@ -208,9 +205,38 @@ class SumOfTheSquaresOfAllPositiveIntegersLessThanOrEqualToN {
 	}
 }
 
+
+class CountstheNumberOfVowelsInAGivenCharacterString {
+	public int countVowels(String str){
+		int x = 0;
+		String string = str.toLowerCase();
+		for(int count = 0;;) {
+			if (!(count < string.length())) break;
+			if (string.charAt(count) == 'a' 
+					|| string.charAt(count) == 'e' 
+					|| string.charAt(count) == 'i' 
+					|| string.charAt(count) == 'o' 
+					|| string.charAt(count) == 'u'
+				 ) x = x + 1;
+			count++;
+		}
+
+		return x;
+	}
+
+	public int recursiveCount(String str){
+		if (str.isEmpty()) return 0;
+		char c = Character.toLowerCase(str.charAt(0));
+		int count = "aeiou".indexOf(c) != -1 ? 1 : 0;
+		 
+		return count + recursiveCount(str.substring(1));
+	}
+}
+
+
 public class Byte {
 
 	public static void main(String[] args) {
-		System.out.println(String.valueOf(new Times().isMultiple(15, 3)));
+		System.out.println(String.valueOf(new IsNMultipleOfM().isMultiple(15, 3)));
 	}
 }
