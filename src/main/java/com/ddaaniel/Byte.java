@@ -11,34 +11,8 @@ import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.implementation.FixedValue;
 import net.bytebuddy.matcher.ElementMatchers;
 
-sealed interface Result<T, E> {
-	record Success<T, E>(T value) implements Result<T, E> {
-	}
-
-	record Failure<T, E>(E error) implements Result<T, E> {
-	}
-}
-
 class Oh {
 	private static final Logger log = Logger.getLogger(Oh.class.getName());
-
-	public Result<String, Integer> tryUnionType(boolean reason) {
-		if (reason)
-			return new Result.Success<>("OPERATIONS A SUCCESS!");
-		return new Result.Failure<>(500);
-	}
-
-	public void ok() {
-		// var resultado = tryUnionType(true);
-		// var x = switch (resultado) {
-
-		switch (tryUnionType(true)) {
-			case Result.Success(var s) -> System.out.println(s);
-			case Result.Failure(var f) -> log.info("Error: " + f);
-		}
-		;
-
-	}
 
 	/*
 	 *
@@ -57,9 +31,9 @@ class Oh {
 	public void aboutReflection() {
 		try {
 			Object typeReference = Class
-					.forName("com.ddaaniel.Oh")
-					.getDeclaredConstructor()
-					.newInstance();
+				.forName("com.ddaaniel.Oh")
+				.getDeclaredConstructor()
+				.newInstance();
 			for (Method m : typeReference.getClass().getMethods()) {
 				// var modifier = m.getModifiers();
 				var returnType = m.getReturnType();
@@ -67,10 +41,10 @@ class Oh {
 				var parameters = m.getParameters();
 
 				log.info(String.format("%s %s %s Params: %s",
-						accessFlag,
-						returnType.getSimpleName(),
-						m.getName(),
-						Arrays.toString(parameters)));
+							accessFlag,
+							returnType.getSimpleName(),
+							m.getName(),
+							Arrays.toString(parameters)));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,12 +55,12 @@ class Oh {
 		// bytecode manipulation (com ByteBuddy)
 		// Modifica o bytecode ANTES da classe ser carregada
 		Class<?> byteModel = new ByteBuddy()
-				.subclass(Object.class)
-				.method(ElementMatchers.named("toString"))
-				.intercept(FixedValue.value("Intercepted by ByteBuddy!"))
-				.make()
-				.load(Byte.class.getClassLoader())
-				.getLoaded();
+			.subclass(Object.class)
+			.method(ElementMatchers.named("toString"))
+			.intercept(FixedValue.value("Intercepted by ByteBuddy!"))
+			.make()
+			.load(Byte.class.getClassLoader())
+			.getLoaded();
 
 		try {
 
@@ -115,8 +89,8 @@ class Oh {
 
 		List<String> someList = List.of("Ana", "Pedro", "Maria");
 		Stream<String> list = someList.stream()
-				.filter(n -> n.startsWith("A"))
-				.map(n -> n.toUpperCase());
+			.filter(n -> n.startsWith("A"))
+			.map(n -> n.toUpperCase());
 
 		list.forEach(n -> System.out.println(n));
 
@@ -124,6 +98,7 @@ class Oh {
 		listt.stream().filter((element) -> (element > 10));
 	}
 }
+
 
 
 public class Byte {
